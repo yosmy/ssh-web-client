@@ -1,0 +1,21 @@
+version: "2"
+
+services:
+  ssh:
+    image: yosmy/ssh-web
+    container_name: ssh_web
+    networks:
+      - proxy
+      - ssh_web
+    expose:
+      - 80
+    environment:
+      - VIRTUAL_HOST=ssh.yosmy.com
+    entrypoint: wssh --address='0.0.0.0' --port=80
+    restart: always
+
+networks:
+  proxy:
+    external: true
+  ssh_web:
+    external: true
